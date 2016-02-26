@@ -4,7 +4,7 @@ For the project to work you need to add your own API Key
 
 2. Add the key here :
 
-Path in project:  com.example.prasadpai.moviesapp.fragments
-Fragment : MoviesFragment
+Path in project: com.example.prasadpai.moviesapp.network;
+Fragment : ServiceGenerator
 
-private static String MOVIES_API_KEY = "ADD_YOUR_OWN_MOVIES_KEY";
+MOVIES_API_KEY = "ADD_YOUR_OWN_MOVIES_KEY";

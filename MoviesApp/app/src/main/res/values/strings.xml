@@ -17,6 +17,10 @@
 
     <string name="pref_sort_label">Sort</string>
     <string name="pref_sort_key">units</string>
+
+    <string name="populairty_key">popularity.desc</string>
+    <string name="ratings_key">vote_average.desc</string>
+
     <string name="title_activity_settings">Settings</string>
     <string name="pref_title_add_friends_to_messages">Sort By</string>
     <string-array name="pref_sort_titles">
@@ -24,9 +28,10 @@
         <item>@string/sort_by_label_ratings</item>
     </string-array>
     <string-array name="pref_sort_values">
-        <item>@string/sort_by_popularity_value</item>
-        <item>@string/sort_by_ratings_value</item>
+        <item>@string/populairty_key</item>
+        <item>@string/ratings_key</item>
     </string-array>
+
 
 
 </resources>

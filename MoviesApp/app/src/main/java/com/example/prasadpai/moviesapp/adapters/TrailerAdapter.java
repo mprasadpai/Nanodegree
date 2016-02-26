@@ -6,17 +6,18 @@ package com.example.prasadpai.moviesapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.example.prasadpai.moviesapp.activities.DetailedActivity;
 import com.example.prasadpai.moviesapp.R;
-import com.example.prasadpai.moviesapp.models.Film;
-
+import com.example.prasadpai.moviesapp.activities.DetailedActivity;
+import com.example.prasadpai.moviesapp.models.Trailer;
 
 import java.util.List;
 
@@ -24,25 +25,25 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class FilmsAdapter extends BaseAdapter {
+public class TrailerAdapter extends BaseAdapter {
 
-    private List<Film> films;
+    private List<Trailer> trailers;
     public Context context;
 
-    public FilmsAdapter(Context ctx, List<Film> filmsArray) {
+    public TrailerAdapter(Context ctx, List<Trailer> trailers) {
         context = ctx;
-        films = filmsArray;
+        this.trailers = trailers;
     }
 
 
     @Override
     public int getCount() {
-        return films.size();
+        return trailers.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return films.get(position);
+        return trailers.get(position);
     }
 
     @Override
@@ -61,20 +62,20 @@ public class FilmsAdapter extends BaseAdapter {
         View view = convertView;
 
         if (view == null) {
-            view = inflater.inflate(R.layout.film_list_item, null);
+            view = inflater.inflate(R.layout.trailer_list_item, null);
         }
 
         ViewHolder holder;
         holder = new ViewHolder(view);
 
-        final Film film = films.get(position);
+        final Trailer trailer = trailers.get(position);
 
-        Glide.with(context).load("https://image.tmdb.org/t/p/w185" + film.getPoster_path()).into(holder.posterimage);
+        holder.trailerTitle.setText(trailer.getName());
 
-        holder.posterimage.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callDetailedActivity(film);
+                callVideoPlayer(trailer.getKey());
             }
         });
 
@@ -85,8 +86,8 @@ public class FilmsAdapter extends BaseAdapter {
 
     public static class ViewHolder {
 
-        @InjectView(R.id.filmPosterImage)
-        ImageView posterimage;
+        @InjectView(R.id.trailerTitle)
+        TextView trailerTitle;
         public ViewHolder(View view){
             ButterKnife.inject(this, view);
         }
@@ -94,10 +95,11 @@ public class FilmsAdapter extends BaseAdapter {
     }
 
 
-    private void callDetailedActivity(Film data)
+    private void callVideoPlayer(String key)
     {
-        Intent intent = new Intent(context, DetailedActivity.class).putExtra(Intent.EXTRA_TEXT, data);
-        context.startActivity(intent);
+        String FILE_PATH = "https://www.youtube.com/watch?v=" + key;
+        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(FILE_PATH)));
+
     }
 
 
