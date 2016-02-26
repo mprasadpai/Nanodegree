@@ -47,7 +47,7 @@ public class MoviesFragment extends Fragment {
 
 
     public static final String TAG = "MoviesFragment";
-    private static String MOVIES_API_KEY = "2712ea4b7e211da7acc201b40a38e71c";
+    private static String MOVIES_API_KEY = "ADD_YOUR_OWN_MOVIES_KEY";
 
     private String sort_by;
 
