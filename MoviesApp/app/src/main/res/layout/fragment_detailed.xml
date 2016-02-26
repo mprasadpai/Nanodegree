@@ -1,0 +1,122 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".activities.DetailedActivity"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/movie_name"
+        android:hint="Movie_Name"
+        android:layout_toRightOf="@+id/lbl_movie"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/poster"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:layout_marginBottom="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_vote"
+            android:text="Vote Average: "
+            android:textStyle="bold"
+            android:layout_weight="3" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/vote"
+            android:hint="Vote Average"
+            android:layout_toRightOf="@+id/lbl_vote"
+            android:layout_weight="7" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_overview"
+            android:text="Overview: "
+            android:textStyle="bold"
+            android:layout_weight="3" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/overview"
+            android:hint="Overview"
+            android:layout_toRightOf="@+id/lbl_movie"
+            android:layout_weight="7"
+            android:minLines="10" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_releasedate"
+            android:text="Release Date: "
+            android:textStyle="bold"
+            android:layout_weight="3" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/releasedate"
+            android:hint="release date"
+            android:layout_toRightOf="@+id/lbl_movie"
+            android:layout_weight="7" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_popularity"
+            android:text="Popularity: "
+            android:textStyle="bold"
+            android:layout_weight="3" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/popularity"
+            android:hint="popularity"
+            android:layout_toRightOf="@+id/lbl_movie"
+            android:layout_weight="7"
+            android:minLines="10" />
+    </LinearLayout>
+
+
+</LinearLayout>
