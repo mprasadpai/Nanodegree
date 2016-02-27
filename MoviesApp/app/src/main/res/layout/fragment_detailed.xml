@@ -19,48 +19,142 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/movie_name"
-        android:hint="Movie_Name"
-        android:layout_toRightOf="@+id/lbl_movie"
-        android:gravity="center_horizontal"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:layout_marginBottom="20dp" />
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginBottom="10dp">
 
-        <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:id="@+id/poster"
-        android:layout_marginBottom="10dp"
-        android:layout_gravity="center_horizontal" />
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:weightSum="10"
+               android:layout_marginBottom="10dp"
+               android:layout_toRightOf="@+id/poster"
+               android:layout_below="@+id/ll_popularity"
+               android:id="@+id/ll_ratings">
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/lbl_vote"
+                   android:text="Ratings :"
+                   android:textStyle="bold"
+                   android:layout_weight="5" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="10"
-        android:layout_marginBottom="10dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/lbl_vote"
-            android:text="Vote Average: "
-            android:textStyle="bold"
-            android:layout_weight="3" />
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/vote"
+                   android:hint="Vote Average"
+                   android:layout_toRightOf="@+id/lbl_vote"
+                   android:layout_weight="5" />
+           </LinearLayout>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/vote"
-            android:hint="Vote Average"
-            android:layout_toRightOf="@+id/lbl_vote"
-            android:layout_weight="7" />
-    </LinearLayout>
+           <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:weightSum="10"
+           android:layout_marginBottom="5dp"
+               android:layout_toRightOf="@+id/poster"
+               android:id="@+id/ll_popularity"
+               android:layout_below="@+id/ll_releasedate">
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:id="@+id/lbl_popularity"
+               android:text="Popularity: "
+               android:textStyle="bold"
+               android:layout_weight="5" />
+
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:id="@+id/popularity"
+               android:hint="popularity"
+               android:layout_toRightOf="@+id/lbl_movie"
+               android:layout_weight="5" />
+       </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:weightSum="10"
+               android:layout_marginBottom="5dp"
+               android:layout_toRightOf="@+id/poster"
+               android:id="@+id/ll_releasedate"
+               android:layout_below="@+id/movie_name">
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/lbl_releasedate"
+                   android:text="Release Date: "
+                   android:textStyle="bold"
+                   android:layout_weight="5" />
+
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/releasedate"
+                   android:hint="release date"
+                   android:layout_toRightOf="@+id/lbl_movie"
+                   android:layout_weight="5" />
+           </LinearLayout>
+
+           <ImageView
+               android:layout_width="150dp"
+               android:layout_height="150dp"
+               android:id="@+id/poster"
+               android:layout_marginBottom="10dp"
+               android:layout_gravity="center_horizontal"
+               android:layout_marginRight="10dp" />
 
 
-    <LinearLayout
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:weightSum="10"
+               android:layout_marginBottom="5dp"
+               android:layout_toRightOf="@+id/poster"
+               android:id="@+id/ll_fav"
+               android:layout_below="@+id/ll_ratings">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/lbl_fav"
+                   android:text="Favourite: "
+                   android:textStyle="bold"
+                   android:layout_gravity="center_vertical" />
+
+               <ImageView
+                   android:layout_width="50dp"
+                   android:layout_height="50dp"
+                   android:id="@+id/favIcon"
+                   android:layout_alignParentRight="false"
+                   android:layout_alignParentEnd="false"
+                   android:layout_toRightOf="@+id/poster"
+                   android:src="@android:drawable/star_off"
+                   android:layout_below="@+id/ll_ratings"
+                   android:layout_marginLeft="30dp" />
+           </LinearLayout>
+
+
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/movie_name"
+               android:hint="@string/movie_name"
+               android:gravity="left"
+               android:textStyle="bold"
+               android:textSize="20sp"
+               android:layout_marginBottom="10dp"
+               android:layout_toRightOf="@+id/poster" />
+
+
+       </RelativeLayout>
+
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="10"
@@ -70,7 +164,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/lbl_overview"
-            android:text="Release Date: "
+            android:text="Overview: "
             android:textStyle="bold"
             android:layout_weight="3" />
 
@@ -84,53 +178,34 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="10"
-        android:layout_marginBottom="10dp">
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lbl_releasedate"
-            android:text="Release Date: "
+            android:id="@+id/lbl_trailers"
+            android:text="Trailers"
             android:textStyle="bold"
-            android:layout_weight="3" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/releasedate"
-            android:hint="release date"
-            android:layout_toRightOf="@+id/lbl_movie"
-            android:layout_weight="7" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="10">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/lbl_popularity"
-            android:text="Popularity: "
-            android:textStyle="bold"
-            android:layout_weight="3" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/popularity"
-            android:hint="popularity"
-            android:layout_toRightOf="@+id/lbl_movie"
-            android:layout_weight="7" />
-    </LinearLayout>
+            android:layout_weight="3"
+            android:layout_marginBottom="10dp" />
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/trailerList"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lbl_reviews"
+            android:text="Reviews"
+            android:textStyle="bold"
+            android:layout_weight="3"
+            android:layout_marginBottom="10dp" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/reviewList"
             android:visibility="visible" />
 
     </LinearLayout>

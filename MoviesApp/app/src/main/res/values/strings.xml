@@ -5,33 +5,38 @@
     <string name="no_netwrok_avialbale">No Network Available</string>
 
 
-
     <!-- Strings related to Settings -->
-
 
 
     <string name="sort_by_ratings_value">vote_average</string>
     <string name="sort_by_popularity_value">popularity</string>
     <string name="sort_by_label_ratings">Ratings</string>
     <string name="sort_by_label_popularity">Popularity</string>
+    <string name="sort_by_label_favlist">Favourite List</string>
+
 
     <string name="pref_sort_label">Sort</string>
-    <string name="pref_sort_key">units</string>
+    <string name="pref_sort_key">sort_key</string>
 
     <string name="populairty_key">popularity.desc</string>
     <string name="ratings_key">vote_average.desc</string>
+    <string name="fav_key">favourite</string>
 
     <string name="title_activity_settings">Settings</string>
     <string name="pref_title_add_friends_to_messages">Sort By</string>
+    <string name="movie_name">Movie_Name</string>
     <string-array name="pref_sort_titles">
         <item>@string/sort_by_label_popularity</item>
         <item>@string/sort_by_label_ratings</item>
+        <item>@string/sort_by_label_favlist</item>
     </string-array>
     <string-array name="pref_sort_values">
         <item>@string/populairty_key</item>
         <item>@string/ratings_key</item>
+        <item>@string/fav_key</item>
     </string-array>
-
+    <string name="title_item_list">@string/app_name</string>
+    <string name="title_item_detail">Movie Details</string>
 
 
 </resources>

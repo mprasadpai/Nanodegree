@@ -6,17 +6,16 @@ package com.example.prasadpai.moviesapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.prasadpai.moviesapp.R;
-import com.example.prasadpai.moviesapp.activities.MovieDetailActivity;
-import com.example.prasadpai.moviesapp.models.Film;
-
+import com.example.prasadpai.moviesapp.models.Reviews;
+import com.example.prasadpai.moviesapp.models.Trailer;
 
 import java.util.List;
 
@@ -24,27 +23,25 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class FilmsAdapter extends BaseAdapter {
+public class ReviewAdapter extends BaseAdapter {
 
-    private List<Film> films;
+    private List<Reviews> reviews;
     public Context context;
 
-
-    public FilmsAdapter(Context ctx, List<Film> filmsArray) {
+    public ReviewAdapter(Context ctx, List<Reviews> reviews) {
         context = ctx;
-        films = filmsArray;
-
+        this.reviews = reviews;
     }
 
 
     @Override
     public int getCount() {
-        return films.size();
+        return reviews.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return films.get(position);
+        return reviews.get(position);
     }
 
     @Override
@@ -63,24 +60,16 @@ public class FilmsAdapter extends BaseAdapter {
         View view = convertView;
 
         if (view == null) {
-            view = inflater.inflate(R.layout.film_list_item, null);
+            view = inflater.inflate(R.layout.review_list_item, null);
         }
 
         ViewHolder holder;
         holder = new ViewHolder(view);
 
-        final Film film = films.get(position);
+        final Reviews trailer = reviews.get(position);
 
-        Glide.with(context).load("https://image.tmdb.org/t/p/w185" + film.getPoster_path()).into(holder.posterimage);
-
-        holder.posterimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                callDetailedActivity(film);
-
-            }
-        });
+        holder.reviewDescription.setText(trailer.getContent());
+        holder.reviewAuthor.setText("Reviewed By: " + trailer.getAuthor());
 
 
         return view;
@@ -89,20 +78,18 @@ public class FilmsAdapter extends BaseAdapter {
 
     public static class ViewHolder {
 
-        @InjectView(R.id.filmPosterImage)
-        ImageView posterimage;
+        @InjectView(R.id.reviewDescription)
+        TextView reviewDescription;
 
-        public ViewHolder(View view) {
+        @InjectView(R.id.reviewAuthor)
+        TextView reviewAuthor;
+
+        public ViewHolder(View view){
             ButterKnife.inject(this, view);
         }
 
     }
 
-
-    private void callDetailedActivity(Film data) {
-        Intent intent = new Intent(context, MovieDetailActivity.class).putExtra(Intent.EXTRA_TEXT, data);
-        context.startActivity(intent);
-    }
 
 
 }

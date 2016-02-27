@@ -44,6 +44,8 @@ public class Film implements Serializable{
     @JsonProperty
     Double vote_average;
 
+    boolean isFav;
+
 
     public Film(Boolean adult, String poster_path, String overview, String release_date, int[] genre_ids, int id, String original_title, String original_language, String title, String backdrop_path, Double popularity, int vote_count, boolean video, Double vote_average) {
         this.adult = adult;
@@ -179,5 +181,13 @@ public class Film implements Serializable{
 
     public void setVote_average(Double vote_average) {
         this.vote_average = vote_average;
+    }
+
+    public boolean isFav() {
+        return isFav;
+    }
+
+    public void setIsFav(boolean isFav) {
+        this.isFav = isFav;
     }
 }
