@@ -4,7 +4,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,12 +26,12 @@ import com.example.prasadpai.moviesapp.adapters.ReviewAdapter;
 import com.example.prasadpai.moviesapp.adapters.TrailerAdapter;
 import com.example.prasadpai.moviesapp.commands.GetReviewsCommand;
 import com.example.prasadpai.moviesapp.commands.GetTrailersCommand;
-import com.example.prasadpai.moviesapp.models.Film;
+import com.example.prasadpai.moviesapp.models.Movie;
 import com.example.prasadpai.moviesapp.models.Reviews;
 import com.example.prasadpai.moviesapp.models.Trailer;
 import com.example.prasadpai.moviesapp.network.AsyncCommand;
 import com.example.prasadpai.moviesapp.network.CommandExecutionError;
-import com.example.prasadpai.moviesapp.sql.MovieDataSource;
+import com.example.prasadpai.moviesapp.contentprovider.MovieDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,17 +39,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-/**
- * A fragment representing a single Item detail screen.
- * This fragment is either contained in a {@link MovieListActivity}
- * in two-pane mode (on tablets) or a {@link MovieDetailActivity}
- * on handsets.
- */
 public class MovieDetailFragment extends Fragment {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
 
     private MovieDataSource movieDataSource;
 
@@ -74,14 +70,53 @@ public class MovieDetailFragment extends Fragment {
     @InjectView(R.id.favIcon)
     ImageView favImage;
 
-    private Film movie;
+    private Movie movie;
     private TrailerAdapter trailerAdapter;
     private List<Reviews> reviews;
     private ReviewAdapter reviewAdapter;
     private List<Trailer> trailers;
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.moviesdetailfragment, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.share) {
+            shraeTrailer(item);
+            return true;
+        }
+        if (id == android.R.id.home) {
+            getActivity().navigateUpTo(new Intent(getActivity(), MovieListActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void shraeTrailer(MenuItem menuItem)
+    {
+
+        if(trailers!=null && trailers.size()>0) {
+
+            ShareActionProvider shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);;
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+            shareIntent.setType("text/plain");
+            String FILE_PATH = TrailerAdapter.YOUTUBE_URL_PREFIX + trailers.get(0).getKey();
+            shareIntent.putExtra(Intent.EXTRA_TEXT,
+                    FILE_PATH);
+            if (shareActionProvider != null ) {
+                shareActionProvider.setShareIntent(shareIntent);
+            }
+        }
+
+    }
+
 
     public MovieDetailFragment() {
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -92,7 +127,7 @@ public class MovieDetailFragment extends Fragment {
 
             movieDataSource = new MovieDataSource(getContext());
             movieDataSource.open();
-            movie = (Film) getArguments().getSerializable(Intent.EXTRA_TEXT);
+            movie = (Movie) getArguments().getSerializable(Intent.EXTRA_TEXT);
             checkIfMovieisFav();
 
         }
@@ -124,14 +159,14 @@ public class MovieDetailFragment extends Fragment {
             public void onClick(View v) {
 
                 if (movie.isFav()) {
-                    movieDataSource.deleteComment(movie);
+                    movieDataSource.deleteFilm(getContext(), movie.getId());
                     favImage.setImageResource(android.R.drawable.star_off);
 
 
                 } else {
 
                     favImage.setImageResource(android.R.drawable.star_on);
-                    movieDataSource.createFilm(movie.getId(), movie.getTitle(), movie.getPoster_path(),movie.getVote_average(),movie.getRelease_date(),movie.getPopularity(),movie.getOverview());
+                    movieDataSource.insertFilm(getContext(), movie.getId(), movie.getTitle(), movie.getPoster_path(), movie.getVote_average(), movie.getRelease_date(), movie.getPopularity(), movie.getOverview());
                 }
 
 
@@ -148,10 +183,7 @@ public class MovieDetailFragment extends Fragment {
     }
 
     private void checkIfMovieisFav() {
-
-
-        List<Film> favList = movieDataSource.getAllFilms();
-
+        List<Movie> favList = movieDataSource.getAllFilms(getContext());
         for(int i=0; i<favList.size(); i++)
         {
             if(favList.get(i).getId() == movie.getId())
@@ -160,7 +192,6 @@ public class MovieDetailFragment extends Fragment {
                 break;
             }
         }
-
     }
 
 
@@ -212,17 +243,13 @@ public class MovieDetailFragment extends Fragment {
     }
 
     private void populateTrailersView() {
-
         trailerAdapter = new TrailerAdapter(getActivity(), trailers);
         trailerList.setAdapter(trailerAdapter);
-
     }
 
     private void populateReviewsView() {
-
         reviewAdapter = new ReviewAdapter(getActivity(), reviews);
         reviewList.setAdapter(reviewAdapter);
-
     }
 
     @Override

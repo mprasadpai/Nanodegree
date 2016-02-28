@@ -2,8 +2,6 @@ package com.example.prasadpai.moviesapp.commands;
 
 import android.os.Handler;
 
-import com.example.prasadpai.moviesapp.models.Film;
-import com.example.prasadpai.moviesapp.models.GetFilmsResponse;
 import com.example.prasadpai.moviesapp.models.GetTrailerResponse;
 import com.example.prasadpai.moviesapp.models.Trailer;
 import com.example.prasadpai.moviesapp.network.AsyncCommand;
@@ -11,7 +9,6 @@ import com.example.prasadpai.moviesapp.network.CommandExecutionError;
 import com.example.prasadpai.moviesapp.network.MovieDBService;
 import com.example.prasadpai.moviesapp.network.ServiceGenerator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.RetrofitError;

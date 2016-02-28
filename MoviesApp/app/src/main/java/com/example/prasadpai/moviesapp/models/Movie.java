@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Film implements Serializable{
+public class Movie implements Serializable{
 
 
     @JsonProperty
@@ -47,7 +47,7 @@ public class Film implements Serializable{
     boolean isFav;
 
 
-    public Film(Boolean adult, String poster_path, String overview, String release_date, int[] genre_ids, int id, String original_title, String original_language, String title, String backdrop_path, Double popularity, int vote_count, boolean video, Double vote_average) {
+    public Movie(Boolean adult, String poster_path, String overview, String release_date, int[] genre_ids, int id, String original_title, String original_language, String title, String backdrop_path, Double popularity, int vote_count, boolean video, Double vote_average) {
         this.adult = adult;
         this.poster_path = poster_path;
         this.overview = overview;
@@ -64,7 +64,7 @@ public class Film implements Serializable{
         this.vote_average = vote_average;
     }
 
-    public Film()
+    public Movie()
     {
 
     }

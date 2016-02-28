@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.prasadpai.moviesapp.R;
 import com.example.prasadpai.moviesapp.activities.MovieDetailActivity;
-import com.example.prasadpai.moviesapp.models.Film;
+import com.example.prasadpai.moviesapp.models.Movie;
 
 
 import java.util.List;
@@ -26,25 +26,25 @@ import butterknife.InjectView;
 
 public class FilmsAdapter extends BaseAdapter {
 
-    private List<Film> films;
+    private List<Movie> movies;
     public Context context;
 
 
-    public FilmsAdapter(Context ctx, List<Film> filmsArray) {
+    public FilmsAdapter(Context ctx, List<Movie> filmsArray) {
         context = ctx;
-        films = filmsArray;
+        movies = filmsArray;
 
     }
 
 
     @Override
     public int getCount() {
-        return films.size();
+        return movies.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return films.get(position);
+        return movies.get(position);
     }
 
     @Override
@@ -63,21 +63,21 @@ public class FilmsAdapter extends BaseAdapter {
         View view = convertView;
 
         if (view == null) {
-            view = inflater.inflate(R.layout.film_list_item, null);
+            view = inflater.inflate(R.layout.movie_list_item, null);
         }
 
         ViewHolder holder;
         holder = new ViewHolder(view);
 
-        final Film film = films.get(position);
+        final Movie movie = movies.get(position);
 
-        Glide.with(context).load("https://image.tmdb.org/t/p/w185" + film.getPoster_path()).into(holder.posterimage);
+        Glide.with(context).load("https://image.tmdb.org/t/p/w185" + movie.getPoster_path()).into(holder.posterimage);
 
         holder.posterimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                callDetailedActivity(film);
+                callDetailedActivity(movie);
 
             }
         });
@@ -99,7 +99,7 @@ public class FilmsAdapter extends BaseAdapter {
     }
 
 
-    private void callDetailedActivity(Film data) {
+    private void callDetailedActivity(Movie data) {
         Intent intent = new Intent(context, MovieDetailActivity.class).putExtra(Intent.EXTRA_TEXT, data);
         context.startActivity(intent);
     }

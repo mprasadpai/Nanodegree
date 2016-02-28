@@ -26,10 +26,10 @@ import com.example.prasadpai.moviesapp.R;
 import com.example.prasadpai.moviesapp.adapters.FilmsAdapter;
 import com.example.prasadpai.moviesapp.commands.GetMoviesCommand;
 import com.example.prasadpai.moviesapp.fragments.MovieDetailFragment;
-import com.example.prasadpai.moviesapp.models.Film;
+import com.example.prasadpai.moviesapp.models.Movie;
 import com.example.prasadpai.moviesapp.network.AsyncCommand;
 import com.example.prasadpai.moviesapp.network.CommandExecutionError;
-import com.example.prasadpai.moviesapp.sql.MovieDataSource;
+import com.example.prasadpai.moviesapp.contentprovider.MovieDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class MovieListActivity extends AppCompatActivity {
 
 
     private boolean mTwoPane;
-    static private List<Film> films;
+    static private List<Movie> movies;
     private static String now_sorted_by = null;
     private String sort_by;
     private View recyclerView;
@@ -49,7 +49,7 @@ public class MovieListActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.moviesfragment, menu);
+        inflater.inflate(R.menu.movieslistactivity, menu);
         return true;
     }
 
@@ -103,7 +103,7 @@ public class MovieListActivity extends AppCompatActivity {
                 fillMovieList();
             } else {
 
-                if(films!=null && films.size()>0) {
+                if(movies !=null && movies.size()>0) {
                     checkForTablet();
                 }else
                 {
@@ -133,10 +133,10 @@ public class MovieListActivity extends AppCompatActivity {
                 now_sorted_by = "favourite";
                 MovieDataSource movieDataSource =  new MovieDataSource(MovieListActivity.this);
                 movieDataSource.open();
-                films = movieDataSource.getAllFilms();
+                movies = movieDataSource.getAllFilms(getBaseContext());
                 movieDataSource.close();
 
-                if(films!=null && films.size()>0) {
+                if(movies !=null && movies.size()>0) {
                     checkForTablet();
                 }else
                 {
@@ -157,21 +157,21 @@ public class MovieListActivity extends AppCompatActivity {
             setupRecyclerView((RecyclerView) recyclerView);
 
         }else {
-            filmsAdapter = new FilmsAdapter(this, films);
+            filmsAdapter = new FilmsAdapter(this, movies);
             filmsGridView.setAdapter(filmsAdapter);
         }
     }
 
     private void updateMovies() {
 
-        films=new ArrayList<>();
+        movies =new ArrayList<>();
 
         final ProgressDialog progressDialog = ProgressDialog.show(this, "Please Wait", "Fetching Movies");
         GetMoviesCommand getMoviesCommand = new GetMoviesCommand(sort_by);
         getMoviesCommand.execute(null, new AsyncCommand.Callback() {
             @Override
             public <T> void success(int statusCode, T result) {
-                films = (ArrayList<Film>) result;
+                movies = (ArrayList<Movie>) result;
                 progressDialog.dismiss();
                 checkForTablet();
             }
@@ -186,22 +186,22 @@ public class MovieListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(films));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(movies));
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<Film> mValues;
+        private final List<Movie> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<Film> items) {
+        public SimpleItemRecyclerViewAdapter(List<Movie> items) {
             mValues = items;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_list_content, parent, false);
+                    .inflate(R.layout.movie_list_content, parent, false);
             return new ViewHolder(view);
         }
 
@@ -240,7 +240,7 @@ public class MovieListActivity extends AppCompatActivity {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
             public final TextView mContentView;
-            public Film mItem;
+            public Movie mItem;
 
             public ViewHolder(View view) {
                 super(view);

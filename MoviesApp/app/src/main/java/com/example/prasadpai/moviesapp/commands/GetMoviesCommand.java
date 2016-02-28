@@ -2,14 +2,13 @@ package com.example.prasadpai.moviesapp.commands;
 
 import android.os.Handler;
 
-import com.example.prasadpai.moviesapp.models.Film;
+import com.example.prasadpai.moviesapp.models.Movie;
 import com.example.prasadpai.moviesapp.models.GetFilmsResponse;
 import com.example.prasadpai.moviesapp.network.AsyncCommand;
 import com.example.prasadpai.moviesapp.network.CommandExecutionError;
 import com.example.prasadpai.moviesapp.network.MovieDBService;
 import com.example.prasadpai.moviesapp.network.ServiceGenerator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit.RetrofitError;
@@ -32,8 +31,8 @@ public class GetMoviesCommand implements AsyncCommand {
             @Override
             public void success(GetFilmsResponse getFilmsResponse, Response response) {
 
-                List<Film> filmDtoList = getFilmsResponse.getResults();
-                callback.success(0, filmDtoList);
+                List<Movie> movieDtoList = getFilmsResponse.getResults();
+                callback.success(0, movieDtoList);
             }
 
             @Override

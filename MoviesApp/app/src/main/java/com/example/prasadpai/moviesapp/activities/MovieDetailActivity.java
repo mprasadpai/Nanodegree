@@ -3,6 +3,8 @@ package com.example.prasadpai.moviesapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import com.example.prasadpai.moviesapp.R;
 import com.example.prasadpai.moviesapp.fragments.MovieDetailFragment;
@@ -28,13 +30,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            navigateUpTo(new Intent(this, MovieListActivity.class));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
+
+
 }

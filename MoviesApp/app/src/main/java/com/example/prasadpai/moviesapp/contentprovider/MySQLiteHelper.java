@@ -1,4 +1,4 @@
-package com.example.prasadpai.moviesapp.sql;
+package com.example.prasadpai.moviesapp.contentprovider;
 
 /**
  * Created by prasadpai on 27/02/16.

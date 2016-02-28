@@ -28,7 +28,7 @@ public class GetFilmsResponse {
     @JsonProperty("page")
     private Integer page;
     @JsonProperty("results")
-    private List<Film> results = new ArrayList<Film>();
+    private List<Movie> results = new ArrayList<Movie>();
     @JsonProperty("total_results")
     private Integer totalResults;
     @JsonProperty("total_pages")
@@ -56,7 +56,7 @@ public class GetFilmsResponse {
      * @return The results
      */
     @JsonProperty("results")
-    public List<Film> getResults() {
+    public List<Movie> getResults() {
         return results;
     }
 
@@ -64,7 +64,7 @@ public class GetFilmsResponse {
      * @param results The results
      */
     @JsonProperty("results")
-    public void setResults(List<Film> results) {
+    public void setResults(List<Movie> results) {
         this.results = results;
     }
 

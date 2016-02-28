@@ -37,6 +37,7 @@
     </string-array>
     <string name="title_item_list">@string/app_name</string>
     <string name="title_item_detail">Movie Details</string>
+    <string name="share_trailer">Share Trailer</string>
 
 
 </resources>

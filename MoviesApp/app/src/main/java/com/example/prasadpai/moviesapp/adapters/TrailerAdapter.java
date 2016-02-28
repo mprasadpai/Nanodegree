@@ -26,6 +26,7 @@ public class TrailerAdapter extends BaseAdapter {
 
     private List<Trailer> trailers;
     public Context context;
+    public static String YOUTUBE_URL_PREFIX = "https://www.youtube.com/watch?v=";
 
     public TrailerAdapter(Context ctx, List<Trailer> trailers) {
         context = ctx;
@@ -94,7 +95,7 @@ public class TrailerAdapter extends BaseAdapter {
 
     private void callVideoPlayer(String key)
     {
-        String FILE_PATH = "https://www.youtube.com/watch?v=" + key;
+        String FILE_PATH =YOUTUBE_URL_PREFIX + key;
         context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(FILE_PATH)));
 
     }
