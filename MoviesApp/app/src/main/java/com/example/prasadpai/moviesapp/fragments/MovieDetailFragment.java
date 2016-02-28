@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.prasadpai.moviesapp.R;
-import com.example.prasadpai.moviesapp.activities.MovieDetailActivity;
 import com.example.prasadpai.moviesapp.activities.MovieListActivity;
 import com.example.prasadpai.moviesapp.adapters.ReviewAdapter;
 import com.example.prasadpai.moviesapp.adapters.TrailerAdapter;

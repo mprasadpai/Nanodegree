@@ -17,7 +17,6 @@ public interface MovieDBService {
     @GET("/discover/movie")
     void getMovies(@Query("api_key") String api, @Query("sort_by") String sortby, Callback<GetFilmsResponse> callback);
 
-
     @GET("/movie/{id}/videos")
     void getTrailers(@Path("id") int id,@Query("api_key") String api, Callback<GetTrailerResponse> callback);
 
