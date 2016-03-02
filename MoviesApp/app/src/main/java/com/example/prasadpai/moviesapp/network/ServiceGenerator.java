@@ -11,7 +11,7 @@ import retrofit.client.OkClient;
 public class ServiceGenerator {
 
 
-    public final static String MOVIES_API_KEY = "ADD_YOUR_OWN_KEY";
+    public final static String MOVIES_API_KEY = "ADD_YOUR_KEY_HERE";
     public static final String API_BASE_URL = "https://api.themoviedb.org/3/";
 
     private static RestAdapter.Builder builder = new RestAdapter.Builder()

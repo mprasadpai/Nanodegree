@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -73,7 +72,7 @@ public class MovieDetailFragment extends Fragment {
     private TrailerAdapter trailerAdapter;
     private List<Reviews> reviews;
     private ReviewAdapter reviewAdapter;
-    private List<Trailer> trailers;
+    protected List<Trailer> trailers;
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -126,7 +125,7 @@ public class MovieDetailFragment extends Fragment {
 
             movieDataSource = new MovieDataSource(getContext());
             movieDataSource.open();
-            movie = (Movie) getArguments().getSerializable(Intent.EXTRA_TEXT);
+            movie = getArguments().getParcelable(Intent.EXTRA_TEXT);
             checkIfMovieisFav();
 
         }

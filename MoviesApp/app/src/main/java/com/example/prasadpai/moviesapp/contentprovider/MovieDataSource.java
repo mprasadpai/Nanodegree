@@ -66,8 +66,8 @@ public class MovieDataSource {
 
 
 
-    public List<Movie> getAllFilms(Context context) {
-        List<Movie> movies = new ArrayList<>();
+    public ArrayList<Movie> getAllFilms(Context context) {
+        ArrayList<Movie> movies = new ArrayList<>();
 
 
         Cursor cursor =  context.getContentResolver().query(contentUri, allColumns, null, null, null);

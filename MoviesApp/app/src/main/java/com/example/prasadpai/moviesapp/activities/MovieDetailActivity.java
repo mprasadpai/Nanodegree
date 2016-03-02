@@ -20,8 +20,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             Bundle arguments = new Bundle();
-            arguments.putSerializable(Intent.EXTRA_TEXT,
-                    getIntent().getSerializableExtra(Intent.EXTRA_TEXT));
+            arguments.putParcelable(Intent.EXTRA_TEXT,
+                    getIntent().getParcelableExtra(Intent.EXTRA_TEXT));
             MovieDetailFragment fragment = new MovieDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()

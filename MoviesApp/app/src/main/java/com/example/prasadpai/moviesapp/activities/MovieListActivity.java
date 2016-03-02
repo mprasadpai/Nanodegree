@@ -38,8 +38,9 @@ import java.util.List;
 public class MovieListActivity extends AppCompatActivity {
 
 
+    private static final String MOVIES_KEY = "MOVIES_KEY";
     private boolean mTwoPane;
-    static private List<Movie> movies;
+    static private ArrayList<Movie> movies;
     private static String now_sorted_by = null;
     private String sort_by;
     private View recyclerView;
@@ -104,6 +105,12 @@ public class MovieListActivity extends AppCompatActivity {
             } else {
 
                 if(movies !=null && movies.size()>0) {
+
+                    if(sort_by.compareTo("favourite")==0)
+                    {
+                        favouriteCall();
+                    }
+
                     checkForTablet();
                 }else
                 {
@@ -130,20 +137,25 @@ public class MovieListActivity extends AppCompatActivity {
                 updateMovies();
                 break;
             case "favourite":
-                now_sorted_by = "favourite";
-                MovieDataSource movieDataSource =  new MovieDataSource(MovieListActivity.this);
-                movieDataSource.open();
-                movies = movieDataSource.getAllFilms(getBaseContext());
-                movieDataSource.close();
-
-                if(movies !=null && movies.size()>0) {
-                    checkForTablet();
-                }else
-                {
-                    Toast.makeText(MovieListActivity.this, "No favourites, change settings", Toast.LENGTH_SHORT).show();
-                }
-
+                favouriteCall();
                 break;
+        }
+
+    }
+
+    private void favouriteCall()
+    {
+        now_sorted_by = "favourite";
+        MovieDataSource movieDataSource =  new MovieDataSource(MovieListActivity.this);
+        movieDataSource.open();
+        movies = movieDataSource.getAllFilms(getBaseContext());
+        movieDataSource.close();
+
+        if(movies !=null && movies.size()>0) {
+            checkForTablet();
+        }else
+        {
+            Toast.makeText(MovieListActivity.this, "No favourites, change settings", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -215,7 +227,7 @@ public class MovieListActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putSerializable(Intent.EXTRA_TEXT, holder.mItem);
+                        arguments.putParcelable(Intent.EXTRA_TEXT, holder.mItem);
                         MovieDetailFragment fragment = new MovieDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
@@ -263,5 +275,21 @@ public class MovieListActivity extends AppCompatActivity {
             isAvailable = true;
         }
         return isAvailable;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+         outState.putParcelableArrayList(MOVIES_KEY, movies);
+
+
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        movies = savedInstanceState.getParcelableArrayList(MOVIES_KEY);
     }
 }
